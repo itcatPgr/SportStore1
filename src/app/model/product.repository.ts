@@ -8,21 +8,21 @@ export class ProductRepository {
 private products: Product[] = [];
 private categories: string[] = [];
 
-// constructor(private dataSource: StaticDataSource) {
-// dataSource.getProducts().subscribe(data => {
-// this.products = data;
-// this.categories = data.map(p => p.category)
-// .filter((c, index, array) => array.indexOf(c) == index).sort() as any;
-// });
-// }
+constructor(private dataSource: StaticDataSource) {
+  dataSource.getProducts().subscribe(data => {
+    this.products = data;
+    this.categories = data.map(p => p.category)
+      .filter((c, index, array) => array.indexOf(c) == index).sort() as any;
+  });
+}
 
-  constructor(private http: HttpClient) {
-    this.http.get<Product[]>(`http://localhost:8080/products`).subscribe(data => {
-      this.products = data;
-      this.categories = data.map(p => p.category)
-        .filter((c, index, array) => array.indexOf(c) == index).sort() as any;
-    });
-  }
+  // constructor(private http: HttpClient) {
+  //   this.http.get<Product[]>(`http://localhost:8080/products`).subscribe(data => {
+  //     this.products = data;
+  //     this.categories = data.map(p => p.category)
+  //       .filter((c, index, array) => array.indexOf(c) == index).sort() as any;
+  //   });
+  // }
 
 getProducts(category: string = ''): Product[] {
 return this.products.filter(p => category == '' || category == p.category);
