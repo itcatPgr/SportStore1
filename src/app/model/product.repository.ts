@@ -19,8 +19,6 @@ private categories: string[] = [];
   constructor(private http: HttpClient) {
     this.http.get<Product[]>(`http://localhost:8080/products`).subscribe(data => {
       this.products = data;
-      console.log('-------------');
-      console.log(this.products);
       this.categories = data.map(p => p.category)
         .filter((c, index, array) => array.indexOf(c) == index).sort() as any;
     });
